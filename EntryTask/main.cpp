@@ -5,9 +5,8 @@
 #include <chrono>
 #include "Constants.hpp"
 #include "Coordinates.hpp"
-#include "Ball.hpp"
-#include "Paddle.hpp"
 #include "Score.hpp"
+#include "Figures.hpp"
 
 Contact CheckPaddleCollision(Ball const& ball, Paddle const& paddle)
 {

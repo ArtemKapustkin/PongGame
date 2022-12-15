@@ -137,18 +137,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Contact.cpp" />
+    <ClCompile Include="Figures.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Paddle.cpp" />
     <ClCompile Include="Score.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Ball.hpp" />
     <ClInclude Include="Constants.hpp" />
     <ClInclude Include="Contact.hpp" />
     <ClInclude Include="Coordinates.hpp" />
-    <ClInclude Include="Paddle.hpp" />
+    <ClInclude Include="Figures.hpp" />
     <ClInclude Include="Score.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

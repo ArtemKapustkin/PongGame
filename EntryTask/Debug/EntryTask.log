@@ -1,10 +1,5 @@
-﻿  Ball.cpp
-C:\Projects\EntryTask\EntryTask\Ball.cpp(52,52): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Projects\EntryTask\EntryTask\Ball.cpp(59,52): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-  Paddle.cpp
-  main.cpp
+﻿  main.cpp
+C:\Projects\EntryTask\EntryTask\main.cpp(117,12): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 C:\Projects\EntryTask\EntryTask\main.cpp(118,12): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Projects\EntryTask\EntryTask\main.cpp(119,12): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Projects\EntryTask\EntryTask\main.cpp(338,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Generating Code...
+C:\Projects\EntryTask\EntryTask\main.cpp(337,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   EntryTask.vcxproj -> C:\Projects\EntryTask\Debug\EntryTask.exe

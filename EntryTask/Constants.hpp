@@ -13,7 +13,7 @@ const int T_HEIGHT = 25;
 
 enum Buttons
 {
-	PaddleOneUp = 0,
+	PaddleOneUp,
 	PaddleOneDown,
 	PaddleTwoUp,
 	PaddleTwoDown,
