@@ -1,5 +1,4 @@
 ﻿  main.cpp
-C:\Projects\EntryTask\EntryTask\main.cpp(117,12): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Projects\EntryTask\EntryTask\main.cpp(118,12): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Projects\EntryTask\EntryTask\main.cpp(337,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Projects\EntryTask\EntryTask\Game.hpp(20,12): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Projects\EntryTask\EntryTask\Game.hpp(21,12): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
   EntryTask.vcxproj -> C:\Projects\EntryTask\Debug\EntryTask.exe

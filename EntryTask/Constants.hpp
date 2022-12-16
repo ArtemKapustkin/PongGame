@@ -1,6 +1,6 @@
 #pragma once
-const int W_WIDTH = 900;
-const int W_HEIGHT = 600;
+const int W_WIDTH = 1920;
+const int W_HEIGHT = 1090;
 const int B_WIDTH = 15;
 const int B_HEIGHT = 15;
 const int P_WIDTH = 15;

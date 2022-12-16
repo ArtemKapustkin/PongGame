@@ -139,6 +139,7 @@
   <ItemGroup>
     <ClCompile Include="Contact.cpp" />
     <ClCompile Include="Figures.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Score.cpp" />
   </ItemGroup>
@@ -147,6 +148,7 @@
     <ClInclude Include="Contact.hpp" />
     <ClInclude Include="Coordinates.hpp" />
     <ClInclude Include="Figures.hpp" />
+    <ClInclude Include="Game.hpp" />
     <ClInclude Include="Score.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
