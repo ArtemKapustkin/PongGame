@@ -1,12 +1,7 @@
 #include "SDL_ttf.h"
 #include "SDL.h"
-#include <string>
-#include <iostream>
-#include <chrono>
 #include "Constants.hpp"
 #include "Coordinates.hpp"
-#include "Score.hpp"
-#include "Figures.hpp"
 #include "Game.hpp"
 
 Game *game = nullptr;
@@ -20,7 +15,6 @@ int main(int argc, char* argv[])
 	int frameTime;
 	
 	game = new Game("Pong", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, W_WIDTH, W_HEIGHT, false);
-	//game->init("Pong", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, W_WIDTH, W_HEIGHT, false); //W_WIDTH, W_HEIGHT,
 	while (game->running())
 	{
 		frameStart = SDL_GetTicks();
@@ -35,6 +29,6 @@ int main(int argc, char* argv[])
 			SDL_Delay(frameDelay - frameTime);
 	}
 
-	game->clear();
+	game->~Game();
 	return 0;
 }

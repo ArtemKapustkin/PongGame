@@ -107,18 +107,22 @@ BotPaddle::BotPaddle(Coordinates position, Coordinates velocity) : Paddle(positi
 
 void BotPaddle::Tracking(Coordinates ball)
 {
+	//std::cout << "BEFORE" << std::endl;
+	//std::cout << "x: " << position.x << std::endl;
+	//std::cout << "y: " << position.y << std::endl << std::endl;
 	position.x = W_WIDTH - 50;
 	if (ball.y > position.y)
 	{
 		//std::cout << "Going down " << std::endl;
-		velocity.y = P_AI_SPEED;
+		this->velocity.y = P_AI_SPEED;
 	}
 
 	else if (ball.y <= position.y)
 	{
 		//std::cout << "Going up " << std::endl;
-		velocity.y = -P_AI_SPEED;
+		this->velocity.y = -P_AI_SPEED;
 	}
-
-
+	//std::cout << "AFTER" << std::endl;
+	//std::cout << "x: " << position.x << std::endl;
+	//std::cout << "y: " << position.y << std::endl;
 }

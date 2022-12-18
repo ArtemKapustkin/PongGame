@@ -1,5 +1,6 @@
 #pragma once
 #include "SDL.h"
+#include<iostream>
 #include "Constants.hpp"
 #include "Coordinates.hpp"
 
@@ -28,6 +29,10 @@ public:
 	void Update(float dt);
 
 	void setStartCoordinates(Coordinates position, Coordinates velocity);
+
+	virtual void Tracking(Coordinates ball) {
+		std::cout << "Misha" << std::endl;
+	};
 };
 
 class Ball : public Figure

@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include <typeinfo>
 
 Game::Game(const char* title, int x, int y, int w, int h, bool fullscreen)
 {
@@ -12,7 +13,8 @@ Game::Game(const char* title, int x, int y, int w, int h, bool fullscreen)
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0 && TTF_Init() == 0 && SDL_Init(SDL_INIT_VIDEO) == 0)
 	{
 		std::cout << "Subsystem initialized." << std::endl;
-
+		scoreFont = TTF_OpenFont("DejaVuSansMono.ttf", 40);
+	    menuFont = TTF_OpenFont("OpenSans-Regular.ttf", 15);
 		window = SDL_CreateWindow(title, x, y, w, h, flags);
 		if (window)
 		{
@@ -31,22 +33,28 @@ Game::Game(const char* title, int x, int y, int w, int h, bool fullscreen)
 		isRunning = false;
 	}
 }
+
 Game::~Game()
 {
-
+	SDL_DestroyWindow(window);
+	SDL_DestroyRenderer(renderer);
+	SDL_FreeSurface(tmpSurface);
+	SDL_DestroyTexture(tmpTexture);
+	SDL_Quit();
+	std::cout << "Game cleaned." << std::endl;
 }
 
-Contact CheckPaddleCollision(Ball const& ball, Paddle const& paddle)
+Contact CheckPaddleCollision(Ball const& ball, Paddle* const& paddle)
 {
 	float ballLeft = ball.position.x;
 	float ballRight = ball.position.x + B_WIDTH;
 	float ballTop = ball.position.y;
 	float ballBottom = ball.position.y + B_HEIGHT;
 
-	float paddleLeft = paddle.position.x;
-	float paddleRight = paddle.position.x + P_WIDTH;
-	float paddleTop = paddle.position.y;
-	float paddleBottom = paddle.position.y + P_HEIGHT;
+	float paddleLeft = paddle->position.x;
+	float paddleRight = paddle->position.x + P_WIDTH;
+	float paddleTop = paddle->position.y;
+	float paddleBottom = paddle->position.y + P_HEIGHT;
 
 	Contact contact{};
 
@@ -132,7 +140,7 @@ Contact CheckWallCollision(Ball const& ball)
 	return contact;
 }
 
-void gameplay(bool b, SDL_Renderer* renderer, TTF_Font* scoreFont)
+void Game::gameplay(bool b)
 {
 	Score playerOneScoreText(Coordinates(W_WIDTH / 4, 20), renderer, scoreFont);
 
@@ -140,18 +148,15 @@ void gameplay(bool b, SDL_Renderer* renderer, TTF_Font* scoreFont)
 
 	Ball ball(Coordinates(W_WIDTH / 2.0f, W_HEIGHT / 2.0f), Coordinates(BALL_SPEED, 0.0f));
 
-	Paddle paddleOne(Coordinates(50.0f, W_HEIGHT / 2.0f), Coordinates(0.0f, 0.0f));
+	paddleOne = new Paddle(Coordinates(50.0f, W_HEIGHT / 2.0f), Coordinates(0.0f, 0.0f));
 
-	Paddle paddleTwo(Coordinates(W_WIDTH - 50.0f, W_HEIGHT / 2.0f), Coordinates(0.0f, 0.0f));
-	BotPaddle botPaddle(Coordinates(W_WIDTH - 50.0f, W_HEIGHT / 2.0f), Coordinates(0.0f, 0.0f));
 	if (b == true)
-		botPaddle.setStartCoordinates(Coordinates(-50.0f, -50.0f), Coordinates(0.0f, 0.0f));
+		paddleTwo = new Paddle(Coordinates(W_WIDTH - 50.0f, W_HEIGHT / 2.0f), Coordinates(0.0f, 0.0f));
 	else
-		paddleTwo.setStartCoordinates(Coordinates(-50.0f, -50.0f), Coordinates(0.0f, 0.0f));
+		paddleTwo = new BotPaddle(Coordinates(W_WIDTH - 50.0f, W_HEIGHT / 2.0f), Coordinates(0.0f, 0.0f));
 
 	int playerOneScore = 0;
 	int playerTwoScore = 0;
-
 
 	bool running = true;
 	bool buttons[4] = {};
@@ -215,52 +220,50 @@ void gameplay(bool b, SDL_Renderer* renderer, TTF_Font* scoreFont)
 
 		if (buttons[Buttons::PaddleOneUp])
 		{
-			paddleOne.velocity.y = -PADDLE_SPEED;
+			paddleOne->velocity.y = -PADDLE_SPEED;
 		}
 		else if (buttons[Buttons::PaddleOneDown])
 		{
-			paddleOne.velocity.y = PADDLE_SPEED;
+			paddleOne->velocity.y = PADDLE_SPEED;
 		}
 		else
 		{
-			paddleOne.velocity.y = 0.0f;
+			paddleOne->velocity.y = 0.0f;
 		}
 
-		if (buttons[Buttons::PaddleTwoUp])
+		if (b == true)
 		{
-			paddleTwo.velocity.y = -PADDLE_SPEED;
+			if (buttons[Buttons::PaddleTwoUp])
+			{
+				paddleTwo->velocity.y = -PADDLE_SPEED;
+			}
+			else if (buttons[Buttons::PaddleTwoDown])
+			{
+				paddleTwo->velocity.y = PADDLE_SPEED;
+			}
+			else
+			{
+				//if (b == true)
+				paddleTwo->velocity.y = 0.0f;
+			}
 		}
-		else if (buttons[Buttons::PaddleTwoDown])
-		{
-			paddleTwo.velocity.y = PADDLE_SPEED;
-		}
-		else
-		{
-			paddleTwo.velocity.y = 0.0f;
-		}
-
-
+		
 		// Update the paddle positions
-		paddleOne.Update(dt);
-		paddleTwo.Update(dt);
-		botPaddle.Update(dt);
+		paddleOne->Update(dt);
+		paddleTwo->Update(dt);
 
 		// Update the ball position
 		ball.Update(dt);
 
 		if (b == false)
-			botPaddle.Tracking(ball.position);
+			paddleTwo->Tracking(ball.position);
 
 		// Check collisions
 		if (Contact contact = CheckPaddleCollision(ball, paddleOne); contact.type != CollisionType::None)
 		{
 			ball.CollideWithPaddle(contact);
 		}
-		else if (contact = CheckPaddleCollision(ball, paddleTwo); contact.type != CollisionType::None && b == true)
-		{
-			ball.CollideWithPaddle(contact);
-		}
-		else if (contact = CheckPaddleCollision(ball, botPaddle); contact.type != CollisionType::None && b == false)
+		else if (contact = CheckPaddleCollision(ball, paddleTwo); contact.type != CollisionType::None)
 		{
 			ball.CollideWithPaddle(contact);
 		}
@@ -304,11 +307,8 @@ void gameplay(bool b, SDL_Renderer* renderer, TTF_Font* scoreFont)
 		ball.Draw(renderer);
 
 		// Draw the paddles
-		paddleOne.Draw(renderer);
-		if (b == true)
-			paddleTwo.Draw(renderer);
-		else
-			botPaddle.Draw(renderer);
+		paddleOne->Draw(renderer);
+		paddleTwo->Draw(renderer);
 
 		playerOneScoreText.Draw();
 		playerTwoScoreText.Draw();
@@ -323,9 +323,12 @@ void gameplay(bool b, SDL_Renderer* renderer, TTF_Font* scoreFont)
 		dt = std::chrono::duration<float, std::chrono::milliseconds::period>(stopTime - startTime).count();
 	}
 
+	// Cleaning screen after ending "while(running)" loop (ESC button)
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+	SDL_RenderClear(renderer);
 }
 
-void Game::printtext(std::string name, int x, int y, int w, int h, SDL_Renderer* renderer, TTF_Font* font)
+void Game::printText(std::string name, int x, int y, int w, int h, TTF_Font* font)
 {
 	const char* label = name.c_str();
 	//TTF_Font* menuFont = TTF_OpenFont("OpenSans-Regular.ttf", 15);
@@ -343,45 +346,10 @@ void Game::printtext(std::string name, int x, int y, int w, int h, SDL_Renderer*
 	SDL_RenderPresent(renderer);
 }
 
-void Game::init(const char* title, int x, int y, int w, int h, bool fullscreen)
-{
-	int flags = 0;
-	
-	if (fullscreen)
-	{
-		flags = SDL_WINDOW_FULLSCREEN;
-	}
-
-	if (SDL_Init(SDL_INIT_EVERYTHING) == 0 && TTF_Init() == 0 && SDL_Init(SDL_INIT_VIDEO) == 0)
-	{
-		std::cout << "Subsystem initialized." << std::endl;
-
-		window = SDL_CreateWindow(title, x, y, w, h, flags);
-		if (window)
-		{
-			std::cout << "Window created successfully." << std::endl;
-		}
-
-		renderer = SDL_CreateRenderer(window, -1, 0);
-		if (renderer)
-		{
-			std::cout << "Renderer created successfully." << std::endl;
-		}
-		isRunning = true;
-	}
-	else
-	{
-		isRunning = false;
-	}
-
-	
-
-}
-
 void Game::handleEvents()
 {
 	SDL_Event event;
-	TTF_Font* scoreFont = TTF_OpenFont("DejaVuSansMono.ttf", 40);
+
 	while (SDL_PollEvent(&event))
 	{
 		if (event.type == SDL_QUIT)
@@ -397,12 +365,15 @@ void Game::handleEvents()
 			else if (event.key.keysym.sym == SDLK_1)
 			{
 				//isRunning = false;
-				gameplay(true, renderer, scoreFont);
+				gameplay(true);
+				//rungame(paddleOne, paddleTwo, renderer, scoreFont);
+
 			}
 			else if (event.key.keysym.sym == SDLK_2)
 			{
 				//isRunning = false;
-				gameplay(false, renderer, scoreFont);
+				gameplay(false);
+				//rungame(paddleOne, botPaddle, renderer, scoreFont);
 			}
 		}
 	}
@@ -413,18 +384,15 @@ void Game::updateMenu()
 	count++;
 	std::cout << count << std::endl;
 }
+
 void Game::renderMenu()
 {
-	TTF_Font* menuFont = TTF_OpenFont("OpenSans-Regular.ttf", 15);
 	//SDL_SetRenderDrawColor(renderer, 0x0, 0x0, 0x0, 0xFF);
 	//SDL_RenderClear(renderer);
 	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
-	printtext("Pong by Artem Kapustkin", W_WIDTH / 2.0f - 500 / 2.0f, W_HEIGHT / 2.0f - 50 - 100, 500, 100, renderer, menuFont);
-	printtext("1) Player vs Player", W_WIDTH / 2.0f - 250 / 2.0f, W_HEIGHT / 2.0f - 50, 250, 50, renderer, menuFont);
-	printtext("2) Player vs Bot", W_WIDTH / 2.0f - 250 / 2.0f, W_HEIGHT / 2.0f, 250, 50, renderer, menuFont);
-	
-	//int u = SDL_RenderCopy(renderer, tmpTexture, NULL, &rect);
-	//std::cout << u << "ERROR: " << SDL_GetError() << std::endl;
+	printText("Pong by Artem Kapustkin", W_WIDTH / 2.0f - 500 / 2.0f, W_HEIGHT / 2.0f - 50 - 100, 500, 100, menuFont);
+	printText("1) Player vs Player", W_WIDTH / 2.0f - 250 / 2.0f, W_HEIGHT / 2.0f - 50, 250, 50, menuFont);
+	printText("2) Player vs Bot", W_WIDTH / 2.0f - 250 / 2.0f, W_HEIGHT / 2.0f, 250, 50, menuFont);
 	SDL_RenderPresent(renderer);
 }
 
@@ -436,23 +404,6 @@ void Game::updateGame()
 
 void Game::renderGame()
 {
-	TTF_Font* scoreFont = TTF_OpenFont("DejaVuSansMono.ttf", 40);
-
 	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
-
-
-
-
 	SDL_RenderPresent(renderer);
-}
-
-
-void Game::clear()
-{
-	SDL_DestroyWindow(window);
-	SDL_DestroyRenderer(renderer);
-	SDL_FreeSurface(tmpSurface);
-	SDL_DestroyTexture(tmpTexture);
-	SDL_Quit();
-	std::cout << "Game cleaned." << std::endl;
 }
