@@ -10,23 +10,21 @@
 class Game
 {
 public:
-	Game(const char* title, int x, int y, int w, int h, bool fullscreen);
+	Game(const char* title, int x, int y, int w, int h);
 	~Game();
-	void handleEvents();
-	void printText(std::string name, int x, int y, int w, int h, TTF_Font* font); //, SDL_Renderer* renderer
+	
+	void printText(std::string name, int x, int y, int w, int h, TTF_Font* font);
 
+	void handleEvents();
 	void updateMenu();
 	void renderMenu();
 
-	void updateGame();
-	void renderGame();
+	void gameplay(bool b);
 
 	bool running()
 	{
 		return isRunning;
 	}
-
-	void gameplay(bool b);
 
 private:
 	int count;

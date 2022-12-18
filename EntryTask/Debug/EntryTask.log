@@ -1,10 +1,8 @@
 ﻿  Game.cpp
-C:\Projects\EntryTask\EntryTask\Game.cpp(393,89): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Projects\EntryTask\EntryTask\Game.cpp(393,54): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Projects\EntryTask\EntryTask\Game.cpp(394,80): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Projects\EntryTask\EntryTask\Game.cpp(394,50): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Projects\EntryTask\EntryTask\Game.cpp(395,70): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Projects\EntryTask\EntryTask\Game.cpp(395,47): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  main.cpp
-  Generating Code...
+C:\Projects\EntryTask\EntryTask\Game.cpp(380,89): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Projects\EntryTask\EntryTask\Game.cpp(380,54): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Projects\EntryTask\EntryTask\Game.cpp(381,80): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Projects\EntryTask\EntryTask\Game.cpp(381,50): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Projects\EntryTask\EntryTask\Game.cpp(382,70): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Projects\EntryTask\EntryTask\Game.cpp(382,47): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   EntryTask.vcxproj -> C:\Projects\EntryTask\Debug\EntryTask.exe

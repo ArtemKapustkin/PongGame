@@ -1,21 +1,21 @@
 #include "Game.hpp"
-#include <typeinfo>
 
-Game::Game(const char* title, int x, int y, int w, int h, bool fullscreen)
+Game::Game(const char* title, int x, int y, int w, int h)
 {
-	int flags = 0;
-
-	if (fullscreen)
-	{
-		flags = SDL_WINDOW_FULLSCREEN;
-	}
-
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0 && TTF_Init() == 0 && SDL_Init(SDL_INIT_VIDEO) == 0)
 	{
 		std::cout << "Subsystem initialized." << std::endl;
 		scoreFont = TTF_OpenFont("DejaVuSansMono.ttf", 40);
 	    menuFont = TTF_OpenFont("OpenSans-Regular.ttf", 15);
-		window = SDL_CreateWindow(title, x, y, w, h, flags);
+
+		if (scoreFont && menuFont)
+		{
+			std::cout << "Fonts loaded successfully." << std::endl;
+		}
+		else
+			std::cout << "Error: " << SDL_GetError() << std::endl;
+
+		window = SDL_CreateWindow(title, x, y, w, h, 0);
 		if (window)
 		{
 			std::cout << "Window created successfully." << std::endl;
@@ -284,8 +284,6 @@ void Game::gameplay(bool b)
 			}
 		}
 
-
-
 		// Clear the window to black
 		SDL_SetRenderDrawColor(renderer, 0x0, 0x0, 0x0, 0xFF);
 		SDL_RenderClear(renderer);
@@ -313,10 +311,8 @@ void Game::gameplay(bool b)
 		playerOneScoreText.Draw();
 		playerTwoScoreText.Draw();
 
-
 		// Present the backbuffer
 		SDL_RenderPresent(renderer);
-
 
 		// Calculate frame time
 		auto stopTime = std::chrono::high_resolution_clock::now();
@@ -331,12 +327,7 @@ void Game::gameplay(bool b)
 void Game::printText(std::string name, int x, int y, int w, int h, TTF_Font* font)
 {
 	const char* label = name.c_str();
-	//TTF_Font* menuFont = TTF_OpenFont("OpenSans-Regular.ttf", 15);
-	//if (auto c = TTF_OpenFont("OpenSans-Regular.ttf", 15); c == NULL)
-	//s	std::cout << c << std::endl << TTF_GetError() << std::endl;
 	tmpSurface = TTF_RenderText_Solid(font, label, White);
-	//if (auto z = TTF_RenderText_Solid(menuFont, "label", White); z == NULL)
-	//	std::cout << z << TTF_GetError() << std::endl;
 	tmpTexture = SDL_CreateTextureFromSurface(renderer, tmpSurface);
 	rect.x = x;
 	rect.y = y;
@@ -364,16 +355,12 @@ void Game::handleEvents()
 			}
 			else if (event.key.keysym.sym == SDLK_1)
 			{
-				//isRunning = false;
 				gameplay(true);
-				//rungame(paddleOne, paddleTwo, renderer, scoreFont);
 
 			}
 			else if (event.key.keysym.sym == SDLK_2)
 			{
-				//isRunning = false;
 				gameplay(false);
-				//rungame(paddleOne, botPaddle, renderer, scoreFont);
 			}
 		}
 	}
@@ -393,17 +380,5 @@ void Game::renderMenu()
 	printText("Pong by Artem Kapustkin", W_WIDTH / 2.0f - 500 / 2.0f, W_HEIGHT / 2.0f - 50 - 100, 500, 100, menuFont);
 	printText("1) Player vs Player", W_WIDTH / 2.0f - 250 / 2.0f, W_HEIGHT / 2.0f - 50, 250, 50, menuFont);
 	printText("2) Player vs Bot", W_WIDTH / 2.0f - 250 / 2.0f, W_HEIGHT / 2.0f, 250, 50, menuFont);
-	SDL_RenderPresent(renderer);
-}
-
-void Game::updateGame()
-{
-	count++;
-	std::cout << count << std::endl;
-}
-
-void Game::renderGame()
-{
-	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 	SDL_RenderPresent(renderer);
 }
