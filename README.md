@@ -6,3 +6,5 @@ Implmented in C/C++. SDL2 and SDL_ttf libraries were used.
 Controls: 
 left paddle - W/S
 right paddle - Up/Down arrows
+
+You can find the binary exeuctable of the game in the ZIP archive.
