@@ -7,4 +7,4 @@ Controls:
 left paddle - W/S
 right paddle - Up/Down arrows
 
-You can find the binary exeuctable of the game in the ZIP archive.
+You can find the binary exeuctable of the game in the RAR archive.
