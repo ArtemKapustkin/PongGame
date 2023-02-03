@@ -11,14 +11,14 @@ int main(int argc, char* argv[])
 	
 	Uint32 frameStart;
 	int frameTime;
-	
+	SDL_Event event;
 	game = new Game("Pong", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, W_WIDTH, W_HEIGHT);
 	while (game->running())
 	{
 		frameStart = SDL_GetTicks();
 
-		game->handleEvents();
-		game->updateMenu();
+		game->handleEvents(&event);
+
 		game->renderMenu();
 
 		frameTime = SDL_GetTicks() - frameStart;
@@ -26,9 +26,6 @@ int main(int argc, char* argv[])
 		if (frameDelay > frameTime)
 			SDL_Delay(frameDelay - frameTime);
 	}
-
 	game->~Game();
-	//Game game("Pong", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, W_WIDTH, W_HEIGHT, false);
-	//game.start();
 	return 0;
 }

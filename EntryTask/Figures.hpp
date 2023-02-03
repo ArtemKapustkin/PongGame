@@ -16,7 +16,7 @@ public:
 
 	Coordinates position;
 	Coordinates velocity;
-	SDL_Rect rect{};
+	SDL_Rect rect;
 };
 
 class Paddle : public Figure
@@ -31,7 +31,7 @@ public:
 	void setStartCoordinates(Coordinates position, Coordinates velocity);
 
 	virtual void Tracking(Coordinates ball) {
-		std::cout << "Misha" << std::endl;
+		std::cout << "Tracking" << std::endl;
 	};
 };
 

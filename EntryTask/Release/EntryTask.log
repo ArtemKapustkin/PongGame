@@ -1,18 +1,17 @@
-﻿  Contact.cpp
-  Figures.cpp
-C:\Projects\EntryTask\EntryTask\Figures.cpp(87,52): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Projects\EntryTask\EntryTask\Figures.cpp(94,52): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+﻿  Figures.cpp
+C:\Projects\EntryTask\EntryTask\Figures.cpp(87,52): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Projects\EntryTask\EntryTask\Figures.cpp(94,53): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   Game.cpp
-C:\Projects\EntryTask\EntryTask\Game.cpp(372,89): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Projects\EntryTask\EntryTask\Game.cpp(372,54): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Projects\EntryTask\EntryTask\Game.cpp(373,80): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Projects\EntryTask\EntryTask\Game.cpp(373,50): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Projects\EntryTask\EntryTask\Game.cpp(374,70): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Projects\EntryTask\EntryTask\Game.cpp(374,47): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Projects\EntryTask\EntryTask\Game.cpp(378,89): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Projects\EntryTask\EntryTask\Game.cpp(378,54): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Projects\EntryTask\EntryTask\Game.cpp(379,80): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Projects\EntryTask\EntryTask\Game.cpp(379,50): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Projects\EntryTask\EntryTask\Game.cpp(380,70): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Projects\EntryTask\EntryTask\Game.cpp(380,47): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   main.cpp
-  Score.cpp
   Generating code
-  Previous IPDB not found, fall back to full compilation.
-  All 129 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  0 of 132 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   EntryTask.vcxproj -> C:\Projects\EntryTask\Release\EntryTask.exe
