@@ -11,9 +11,10 @@ public:
 	void SetScore(int score);
 	void Draw();
 
+private:
 	SDL_Renderer* renderer;
 	TTF_Font* font;
-	SDL_Surface* surface{};
-	SDL_Texture* texture{};
-	SDL_Rect rect{};
+	SDL_Surface* surface;
+	SDL_Texture* texture;
+	SDL_Rect rect;
 };

@@ -8,8 +8,8 @@ Score::Score(Coordinates position, SDL_Renderer* renderer, TTF_Font* font) : ren
 	int width, height;
 	SDL_QueryTexture(texture, nullptr, nullptr, &width, &height);
 
-	rect.x = static_cast<int>(position.x);
-	rect.y = static_cast<int>(position.y);
+	rect.x = static_cast<int>(position.getX());
+	rect.y = static_cast<int>(position.getY());
 	rect.w = width;
 	rect.h = height;
 }

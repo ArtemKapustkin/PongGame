@@ -26,5 +26,31 @@ public:
 		return Coordinates(x * rhs, y * rhs);
 	}
 
+	Coordinates getCoordinates()
+	{
+
+	}
+
+	float getX()
+	{
+		return x;
+	}
+
+	float getY()
+	{
+		return y;
+	}
+
+	void setX(float xc)
+	{
+		x = xc;
+	}
+
+	void setY(float yc)
+	{
+		y = yc;
+	}
+
+private:
 	float x, y;
 };

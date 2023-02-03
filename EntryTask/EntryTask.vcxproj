@@ -141,7 +141,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Contact.cpp" />
     <ClCompile Include="Figures.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
@@ -149,7 +148,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Constants.hpp" />
-    <ClInclude Include="Contact.hpp" />
     <ClInclude Include="Coordinates.hpp" />
     <ClInclude Include="Figures.hpp" />
     <ClInclude Include="Game.hpp" />

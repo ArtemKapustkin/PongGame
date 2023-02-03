@@ -1,0 +1,15 @@
+﻿  Figures.cpp
+C:\Projects\EntryTask\EntryTask\Figures.cpp(87,52): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Projects\EntryTask\EntryTask\Figures.cpp(94,53): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  Game.cpp
+C:\Projects\EntryTask\EntryTask\Game.cpp(373,89): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Projects\EntryTask\EntryTask\Game.cpp(373,54): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Projects\EntryTask\EntryTask\Game.cpp(374,80): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Projects\EntryTask\EntryTask\Game.cpp(374,50): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Projects\EntryTask\EntryTask\Game.cpp(375,70): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Projects\EntryTask\EntryTask\Game.cpp(375,47): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  main.cpp
+  Score.cpp
+  Generating Code...
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(1096,5): error MSB6006: "link.exe" exited with code 1104.
+LINK : fatal error LNK1104: cannot open file 'SDL_ttf.lib'

@@ -11,12 +11,13 @@ class Game
 {
 public:
 	Game(const char* title, int x, int y, int w, int h);
+
 	~Game();
 	
 	void printText(std::string name, int x, int y, int w, int h, TTF_Font* font);
 
-	void handleEvents();
-	void updateMenu();
+	void handleEvents(SDL_Event* event);
+
 	void renderMenu();
 
 	void gameplay(bool b);
@@ -29,6 +30,7 @@ public:
 private:
 	int count;
 	bool isRunning;
+	Ball* ball;
 	Paddle* paddleOne;
 	Paddle* paddleTwo;
 	SDL_Window* window;
@@ -36,7 +38,7 @@ private:
 	TTF_Font* scoreFont;
 	TTF_Font* menuFont;
 	SDL_Color White = { 255, 255, 255 };
-	SDL_Surface* tmpSurface{};
-	SDL_Texture* tmpTexture{};
-	SDL_Rect rect{};
+	SDL_Surface* tmpSurface;
+	SDL_Texture* tmpTexture;
+	SDL_Rect rect;
 };
