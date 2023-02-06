@@ -29,6 +29,12 @@ enum class CollisionType
 	Right
 };
 
+enum class GameMode
+{
+	PlayerVsPlayer,
+	PlayerVsBot
+};
+
 class Contact
 {
 public:

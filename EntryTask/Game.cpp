@@ -5,32 +5,32 @@ Game::Game(const char* title, int x, int y, int w, int h)
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0 && TTF_Init() == 0 && SDL_Init(SDL_INIT_VIDEO) == 0)
 	{
 		std::cout << "Subsystem initialized." << std::endl;
-		scoreFont = TTF_OpenFont("DejaVuSansMono.ttf", 40);
-	    menuFont = TTF_OpenFont("OpenSans-Regular.ttf", 15);
+		this->scoreFont = TTF_OpenFont("DejaVuSansMono.ttf", 40);
+	    this->menuFont = TTF_OpenFont("OpenSans-Regular.ttf", 15);
 
-		if (scoreFont && menuFont)
+		if (this->scoreFont && this->menuFont)
 		{
 			std::cout << "Fonts loaded successfully." << std::endl;
 		}
 		else
 			std::cout << "Error: " << SDL_GetError() << std::endl;
 
-		window = SDL_CreateWindow(title, x, y, w, h, 0);
-		if (window)
+		this->window = SDL_CreateWindow(title, x, y, w, h, 0);
+		if (this->window)
 		{
 			std::cout << "Window created successfully." << std::endl;
 		}
 
-		renderer = SDL_CreateRenderer(window, -1, 0);
-		if (renderer)
+		this->renderer = SDL_CreateRenderer(window, -1, 0);
+		if (this->renderer)
 		{
 			std::cout << "Renderer created successfully." << std::endl;
 		}
-		isRunning = true;
+		this->setIsRunning(true);
 	}
 	else
 	{
-		isRunning = false;
+		this->setIsRunning(false);
 	}
 }
 
@@ -139,7 +139,21 @@ Contact CheckWallCollision(Ball* const& ball)
 	return contact;
 }
 
-void Game::gameplay(bool b)
+
+void Game::initFigures(GameMode gamemode)
+{
+	this->ball = new Ball(Coordinates(W_WIDTH / 2.0f, W_HEIGHT / 2.0f), Coordinates(BALL_SPEED, 0.0f));
+
+	this->paddleOne = new Paddle(Coordinates(50.0f, W_HEIGHT / 2.0f), Coordinates(0.0f, 0.0f));
+
+	if (gamemode == GameMode::PlayerVsPlayer)
+		this->paddleTwo = new Paddle(Coordinates(W_WIDTH - 50.0f, W_HEIGHT / 2.0f), Coordinates(0.0f, 0.0f));
+	else
+		this->paddleTwo = new BotPaddle(Coordinates(W_WIDTH - 50.0f, W_HEIGHT / 2.0f), Coordinates(0.0f, 0.0f));
+}
+
+
+void Game::gameplay(GameMode gamemode, SDL_Event* event)
 {
 	Score playerOneScoreText(Coordinates(W_WIDTH / 4, 20), renderer, scoreFont);
 
@@ -147,17 +161,10 @@ void Game::gameplay(bool b)
 
 	//Ball ball(Coordinates(W_WIDTH / 2.0f, W_HEIGHT / 2.0f), Coordinates(BALL_SPEED, 0.0f));
 
-	ball = new Ball(Coordinates(W_WIDTH / 2.0f, W_HEIGHT / 2.0f), Coordinates(BALL_SPEED, 0.0f));
 
-	paddleOne = new Paddle(Coordinates(50.0f, W_HEIGHT / 2.0f), Coordinates(0.0f, 0.0f));
-
-	if (b == true)
-		paddleTwo = new Paddle(Coordinates(W_WIDTH - 50.0f, W_HEIGHT / 2.0f), Coordinates(0.0f, 0.0f));
-	else
-		paddleTwo = new BotPaddle(Coordinates(W_WIDTH - 50.0f, W_HEIGHT / 2.0f), Coordinates(0.0f, 0.0f));
-
-	int playerOneScore = 0;
-	int playerTwoScore = 0;
+	initFigures(gamemode);
+	
+	int playerOneScore = 0, playerTwoScore = 0;
 
 	bool running = true;
 	bool buttons[4] = {};
@@ -167,51 +174,50 @@ void Game::gameplay(bool b)
 	while (running)
 	{
 		auto startTime = std::chrono::high_resolution_clock::now();
-		SDL_Event event;
-		while (SDL_PollEvent(&event))
+		while (SDL_PollEvent(event))
 		{
-			if (event.type == SDL_QUIT)
+			if (event->type == SDL_QUIT)
 			{
 				running = false;
 			}
-			else if (event.type == SDL_KEYDOWN)
+			else if (event->type == SDL_KEYDOWN)
 			{
-				if (event.key.keysym.sym == SDLK_ESCAPE)
+				if (event->key.keysym.sym == SDLK_ESCAPE)
 				{
 					running = false;
 				}
-				else if (event.key.keysym.sym == SDLK_w)
+				else if (event->key.keysym.sym == SDLK_w)
 				{
 					buttons[Buttons::PaddleOneUp] = true;
 				}
-				else if (event.key.keysym.sym == SDLK_s)
+				else if (event->key.keysym.sym == SDLK_s)
 				{
 					buttons[Buttons::PaddleOneDown] = true;
 				}
-				else if (event.key.keysym.sym == SDLK_UP)
+				else if (event->key.keysym.sym == SDLK_UP)
 				{
 					buttons[Buttons::PaddleTwoUp] = true;
 				}
-				else if (event.key.keysym.sym == SDLK_DOWN)
+				else if (event->key.keysym.sym == SDLK_DOWN)
 				{
 					buttons[Buttons::PaddleTwoDown] = true;
 				}
 			}
-			else if (event.type == SDL_KEYUP)
+			else if (event->type == SDL_KEYUP)
 			{
-				if (event.key.keysym.sym == SDLK_w)
+				if (event->key.keysym.sym == SDLK_w)
 				{
 					buttons[Buttons::PaddleOneUp] = false;
 				}
-				else if (event.key.keysym.sym == SDLK_s)
+				else if (event->key.keysym.sym == SDLK_s)
 				{
 					buttons[Buttons::PaddleOneDown] = false;
 				}
-				else if (event.key.keysym.sym == SDLK_UP)
+				else if (event->key.keysym.sym == SDLK_UP)
 				{
 					buttons[Buttons::PaddleTwoUp] = false;
 				}
-				else if (event.key.keysym.sym == SDLK_DOWN)
+				else if (event->key.keysym.sym == SDLK_DOWN)
 				{
 					buttons[Buttons::PaddleTwoDown] = false;
 				}
@@ -232,7 +238,7 @@ void Game::gameplay(bool b)
 			paddleOne->velocity.setY(0.0f);
 		}
 
-		if (b == true)
+		if (gamemode == GameMode::PlayerVsPlayer)
 		{
 			if (buttons[Buttons::PaddleTwoUp])
 			{
@@ -244,7 +250,6 @@ void Game::gameplay(bool b)
 			}
 			else
 			{
-				//if (b == true)
 				paddleTwo->velocity.setY(0.0f);
 			}
 		}
@@ -256,7 +261,8 @@ void Game::gameplay(bool b)
 		// Update the ball position
 		ball->Update(dt);
 
-		if (b == false)
+		// If gamemode is "vs Bot" bot paddle start tracking ball position
+		if (gamemode == GameMode::PlayerVsBot)
 			paddleTwo->Tracking(ball->position);
 
 		// Check collisions
@@ -361,12 +367,12 @@ void Game::handleEvents(SDL_Event* event)
 			}
 			else if (event->key.keysym.sym == SDLK_1)
 			{
-				gameplay(true);
+				gameplay(GameMode::PlayerVsPlayer, event);
 
 			}
 			else if (event->key.keysym.sym == SDLK_2)
 			{
-				gameplay(false);
+				gameplay(GameMode::PlayerVsBot, event);
 			}
 		}
 	}

@@ -14,21 +14,27 @@ public:
 
 	~Game();
 	
+	void initFigures(GameMode gamemode);
+
 	void printText(std::string name, int x, int y, int w, int h, TTF_Font* font);
 
 	void handleEvents(SDL_Event* event);
 
 	void renderMenu();
 
-	void gameplay(bool b);
+	void gameplay(GameMode gamemode, SDL_Event* event);
 
-	bool running()
+	bool IsRunning() const
 	{
-		return isRunning;
+		return this->isRunning;
+	}
+
+	void setIsRunning(bool b)
+	{
+		this->isRunning = b;
 	}
 
 private:
-	int count;
 	bool isRunning;
 	Ball* ball;
 	Paddle* paddleOne;
