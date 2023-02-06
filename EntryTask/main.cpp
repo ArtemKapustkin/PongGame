@@ -2,8 +2,6 @@
 #include "SDL.h"
 #include "Game.hpp"
 
-Game *game = nullptr;
-
 int main(int argc, char* argv[])
 {
 	const int FPS = 60;
@@ -12,8 +10,8 @@ int main(int argc, char* argv[])
 	Uint32 frameStart;
 	int frameTime;
 	SDL_Event event;
-	game = new Game("Pong", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, W_WIDTH, W_HEIGHT);
-	while (game->running())
+	Game* game = new Game("Pong", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, W_WIDTH, W_HEIGHT);
+	while (game->IsRunning())
 	{
 		frameStart = SDL_GetTicks();
 

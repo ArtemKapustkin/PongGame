@@ -26,11 +26,6 @@ public:
 		return Coordinates(x * rhs, y * rhs);
 	}
 
-	Coordinates getCoordinates()
-	{
-
-	}
-
 	float getX()
 	{
 		return x;
