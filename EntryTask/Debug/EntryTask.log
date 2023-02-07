@@ -1,2 +1,13 @@
-﻿  Score.cpp
+﻿  Figures.cpp
+C:\Projects\EntryTask\EntryTask\Figures.cpp(87,58): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Projects\EntryTask\EntryTask\Figures.cpp(94,59): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  Game.cpp
+C:\Projects\EntryTask\EntryTask\Game.cpp(475,89): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Projects\EntryTask\EntryTask\Game.cpp(475,54): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Projects\EntryTask\EntryTask\Game.cpp(476,80): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Projects\EntryTask\EntryTask\Game.cpp(476,50): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Projects\EntryTask\EntryTask\Game.cpp(477,70): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Projects\EntryTask\EntryTask\Game.cpp(477,47): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  Score.cpp
+  Generating Code...
   EntryTask.vcxproj -> C:\Projects\EntryTask\Debug\EntryTask.exe
