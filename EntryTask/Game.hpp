@@ -14,15 +14,23 @@ public:
 
 	~Game();
 	
-	void initFigures(GameMode gamemode);
+	void InitFigures(GameMode gamemode);
 
-	void printText(std::string name, int x, int y, int w, int h, TTF_Font* font);
+	void UpdateFigures(GameMode gamemode, float dt);
 
-	void handleEvents(SDL_Event* event);
+	void CheckingCollision();
 
-	void renderMenu();
+	void DrawingNet();
 
-	void gameplay(GameMode gamemode, SDL_Event* event);
+	void ControlButtonHandler(SDL_Event* event, bool running, bool buttons[4], GameMode gamemode);
+
+	void PrintText(std::string name, int x, int y, int w, int h, TTF_Font* font);
+
+	void HandleEvents(SDL_Event* event);
+
+	void RenderMenu();
+
+	void Gameplay(GameMode gamemode, SDL_Event* event);
 
 	bool IsRunning() const
 	{
@@ -46,5 +54,7 @@ private:
 	SDL_Color White = { 255, 255, 255 };
 	SDL_Surface* tmpSurface;
 	SDL_Texture* tmpTexture;
-	SDL_Rect rect;
+	Score* playerOneScore;
+	Score* playerTwoScore;
+	SDL_Rect* rect;
 };

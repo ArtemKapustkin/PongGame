@@ -8,7 +8,6 @@ class Figure
 {
 public:
 	Figure(Coordinates position, Coordinates velocity);
-	//~Figure();
 
 	void Update(float dt);
 
@@ -28,7 +27,7 @@ public:
 
 	void Update(float dt);
 
-	void setStartCoordinates(Coordinates position, Coordinates velocity);
+	void SetStartCoordinates(Coordinates position, Coordinates velocity);
 
 	virtual void Tracking(Coordinates ball) {
 		std::cout << "Tracking" << std::endl;
