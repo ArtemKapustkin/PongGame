@@ -29,10 +29,24 @@ enum class CollisionType
 	Right
 };
 
+enum class Winner
+{
+	NoWinner,
+	LeftPlayer,
+	RightPlayer
+};
+
 enum class GameMode
 {
+	Unselected,
 	PlayerVsPlayer,
 	PlayerVsBot
+};
+
+enum class ExitOptions
+{
+	ExitToWinScreen,
+	ExitToMainMenu
 };
 
 class Contact
