@@ -15,10 +15,17 @@ int main(int argc, char* argv[])
 	{
 		frameStart = SDL_GetTicks();
 
-		game->HandleEvents(&event);
-
-		game->RenderMenu();
-
+		if (game->GetWinner() != Winner::NoWinner)
+		{
+			game->RenderWinScreen();
+			game->HandleWinScreenEvents(&event);
+		}
+		else
+		{
+			game->RenderMenu();
+			game->HandleEvents(&event);
+		}
+			
 		frameTime = SDL_GetTicks() - frameStart;
 
 		if (frameDelay > frameTime)

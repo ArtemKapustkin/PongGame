@@ -18,7 +18,7 @@ Score::Score(Coordinates position, SDL_Renderer* renderer, TTF_Font* font) : ren
 
 Score::~Score()
 {
-	delete this->rect; //?
+	delete this->rect;
 	SDL_FreeSurface(this->surface);
 	SDL_DestroyTexture(this->texture);
 }
